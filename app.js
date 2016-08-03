@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var uploadfile = require('./routes/uploadfile');
+var getocrmsg = require('./routes/getocrmsg');
+var getimage = require('./routes/getimage');
 
 var app = express();
 
@@ -24,6 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.post('/TIMS-Server/postController/uploadFile.action', uploadfile);
+app.get('/TIMS-Server/postController/getOCRMsg.action', getocrmsg);
+app.get('/TIMS-Server/cMImageController/getImage.action', getimage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
