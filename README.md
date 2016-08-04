@@ -1,8 +1,10 @@
 # mock-tims-ocr
 
+The mock TIMS OCR API server is a fully conforming implementation of the [TIMS API](https://yyssc.github.io/ssc_ocr_api.html) developed by [北京天创征腾信息科技](http://www.tchzt.com/).
+
 ## deploy
 
-Examle, using pm2 to manage node process.
+Example, using pm2 to manage node process.
 
 install pm2
 
