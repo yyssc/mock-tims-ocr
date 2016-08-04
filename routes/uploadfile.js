@@ -22,9 +22,8 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
   // - req.files {Object}
 
   console.log(req.body);
-  console.log(typeof req.body.file_param);
+
   var file_param = JSON.parse(req.body.file_param);
-  console.log(file_param);
 
   // get unique file id
   var fileUUID = file_param.data.file_pk;
@@ -80,9 +79,9 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
       "taxsuppliename": "", //销售方名称,
       "taxsupplieaddr": "", //销售方地址电话,
       "taxsupplieaccount": "", //销售方开户行及账号,
-			"noteType": "", //收款人
-			"noteType": "", //复合
-			"noteType": "" //开票人
+			"payee": "", //收款人
+			"reviewer": "", //复合
+			"drawer": "" //开票人
     }
   };
 

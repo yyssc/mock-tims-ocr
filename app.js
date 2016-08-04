@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.post('/TIMS-Server/postController/uploadFile.action', uploadfile);
-app.get('/TIMS-Server/postController/getOCRMsg.action', getocrmsg);
-app.get('/TIMS-Server/cMImageController/getImage.action', getimage);
+app.post('/TIMS-Server/postController/getOCRMsg.action', getocrmsg);
+app.post('/TIMS-Server/cMImageController/getImage.action', getimage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
