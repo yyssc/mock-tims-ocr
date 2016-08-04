@@ -39,3 +39,7 @@ in another terminal
 ```
 mocha
 ```
+
+## use case
+
+- https://github.com/yyssc/tims-ocr-api
