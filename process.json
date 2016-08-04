@@ -1,0 +1,9 @@
+{
+  "apps": [{
+    "name": "mock-tims-ocr",
+    "script": "bin/www",
+    "env": {
+      "PORT": "3004"
+    }
+  }]
+}
