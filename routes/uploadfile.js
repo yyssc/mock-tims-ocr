@@ -6,6 +6,8 @@ var multipartMiddleware = multipart();
 
 /* 图像上传接口 */
 router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware, function(req, res, next) {
+	res.type('application/json');
+
   var sk = req.get('secretKey');
   if (sk != 'tims') {
     res.json({
@@ -15,15 +17,34 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
     return;
   }
 
+  // request field:
+  // - req.body.file_param {String}
+  // - req.files {Object}
+
+  console.log(req.body);
+  console.log(typeof req.body.file_param);
+  var file_param = JSON.parse(req.body.file_param);
+  console.log(file_param);
+
+  // get unique file id
+  var fileUUID = file_param.data.file_pk;
+  if (!fileUUID) {
+    console.log('file uuid not found!');
+    res.json({
+      "return_code": 2,
+      "error_msg": "cant find data.file_pk field."
+    });
+    return;
+  }
+
   // req.body.file_param
-  console.log(req.body.file_param);
 	var fakeFileParam = {
     "bill_pk": "", //单据pk，
 		"note_type": "", //发票类型,//0：增值税专用发票
     "doc_name": "", //文件分类名称，//如：a.jpg为上海增票
     "recognize_type": "", //识别方式，//同步/异步
     "data": {
-	    "file_pk": "", //文件唯一标识,//nc端定义的文件唯一标识
+	    "file_pk": fileUUID, //文件唯一标识,//nc端定义的文件唯一标识
 	    "file_name": "", //文件名称，//文件名称
 	    "file_format": "", //文件类型，//如:jpg/bmp/gif
 	    "file_size": "", //文件大小，//用于后台做大小校验
@@ -33,14 +54,13 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
 	};
 
   // req.body.file
-  console.log(req.body.file);
 	var fakeFile = {};
 
 	var fakeResult = {
     "return_code": 0, //结果代码,
     "error_msg": "", //错误信息,
     "data": {
-      "image_id ": "", //文件唯一id，  //影像系统图片唯一标识 
+      "image_id": fileUUID, //文件唯一id，  //影像系统图片唯一标识 
 			"file_pk": "", //文件pk ，//NC系统提供的文件pk（请求报文获取）
 			"image_url": "", //文件访问地址 ，//NC系统可以直接访问的url路径
 			"invCode": "", //发票代码,
@@ -66,7 +86,12 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
     }
   };
 
-	res.json(fakeResult);
+	res
+    //.set({
+    //  'Content-Type': 'application/json'
+    //})
+    .type('application/json')
+    .json(fakeResult);
 });
 
 module.exports = router;

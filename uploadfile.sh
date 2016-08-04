@@ -17,18 +17,22 @@
 
 json='
 {
-  "bill_pk": "123"
-	"note_type": ""
-  "doc_name": ""
-  "recognize_type": ""
+  "bill_pk": "123",
+	"note_type": 0,
+  "doc_name": "test.jpg为上海增票",
+  "recognize_type": "同步",
   "data": {
-    "file_pk": ""
-    "file_name": ""
-    "file_format": ""
-    "file_size": ""
-    "file_md5": ""
-    "desc": ""
+    "file_pk": "img123",
+    "file_name": "test.jpg",
+    "file_format": "jpg",
+    "file_size": "`stat --printf="%s"`",
+    "file_md5": "`($(md5sum test.jpg))`",
+    "desc": "a test.jpg image"
 	}
 }'
 
-curl -F "file_param=$json" --header "secretKey: tims" http://127.0.0.1:3000/TIMS-Server/postController/uploadFile.action
+curl \
+  -F "file=test.jpg" \
+  -F "file_param=$json" \
+  --header "secretKey: tims" \
+  http://127.0.0.1:3000/TIMS-Server/postController/uploadFile.action
