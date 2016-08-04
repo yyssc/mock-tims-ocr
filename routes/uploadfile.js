@@ -57,7 +57,7 @@ router.post('/TIMS-Server/postController/uploadFile.action', multipartMiddleware
 
 	var fakeResult = {
     "return_code": 0, //结果代码,
-    "error_msg": "", //错误信息,
+    //"error_msg": "", //错误信息,
     "data": {
       "image_id": fileUUID, //文件唯一id，  //影像系统图片唯一标识 
 			"file_pk": "", //文件pk ，//NC系统提供的文件pk（请求报文获取）
