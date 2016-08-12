@@ -6,6 +6,9 @@ var multipartMiddleware = multipart();
 
 /* ocr信息及文件查询接口 */
 router.post('/TIMS-Server/postController/getOCRMsg.action', multipartMiddleware, function(req, res, next) {
+  // request field:
+  // - req.body.file_id {String}
+  
 	res.type('application/json');
 
   var sk = req.get('secretKey');
@@ -17,9 +20,6 @@ router.post('/TIMS-Server/postController/getOCRMsg.action', multipartMiddleware,
     return;
   }
 
-  // request field:
-  // - req.file_id {String}
-  
   console.log(req.body);
 
   // get unique file id
